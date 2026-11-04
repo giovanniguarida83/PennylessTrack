@@ -4,20 +4,13 @@ on:
   pull_request: {}
   workflow_dispatch: {}
   push:
-    branches:
-      - main
-      - master
-
-permissions:
-  contents: read
+    branches: [main, master]
 
 jobs:
   semgrep:
-    name: semgrep/ci
     runs-on: ubuntu-latest
     container:
       image: semgrep/semgrep
-    if: (github.actor != 'dependabot[bot]')
     steps:
       - uses: actions/checkout@v4
       - run: semgrep ci
